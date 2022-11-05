@@ -9,7 +9,7 @@
 
 import Text.Printf
 
-doubleFactorial :: Int -> Int
+doubleFactorial :: Integer -> Integer
 doubleFactorial 0 = 1
 doubleFactorial 1 = 1
 doubleFactorial n = n * doubleFactorial (n - 2)
