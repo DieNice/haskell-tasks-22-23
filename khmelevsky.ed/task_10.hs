@@ -4,14 +4,9 @@
 --   полученный после сдачи экзаментов. 
 --  Отсортировать по убыванию среднего балла.
 
-import Data.List ( sortBy )
-import Data.Function ( on )
- 
 main :: IO ()
 main = do
-    let second (_, x) = x
-        cond f = f `on` second 
-    print $ sortBy (cond $ flip compare) students
+    print $ qsort students
     where
         students :: [([Char],Float)]
         students = [
@@ -20,3 +15,11 @@ main = do
                 ("Markov", 4.7),
                 ("Kosicyna", 3.9)
             ]
+
+second :: (a, b) -> b
+second (_, x) = x
+
+-- Немного модифицировали нашу сортировку и сделали её не по возрастанию, а по убыванию
+qsort :: Ord a1 => [(a2, a1)] -> [(a2, a1)]
+qsort [] = []
+qsort (x:xs) = qsort (filter (\y -> second x <= second y) xs) ++ [x] ++ qsort (filter (\y -> second x > second y) xs)
