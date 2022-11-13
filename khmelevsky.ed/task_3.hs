@@ -5,19 +5,29 @@
 -- Меня немного нервируют варнинги, поэтому добавил эту строчку, чтобы не отвлекали
 -- P.S. Какая-то непонятная мне проблема с отступами в функции
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
+import Data.Time ( diffUTCTime, getCurrentTime )
+import Control.Monad ()
 
--- Число для передачи в функцию получаем из консоли
-main :: IO()
+main :: IO [()]
 main = do
-    input <- getLine
-    let x = readNum input
-    print $ fibonacci x
+    mapM testTimeFibonachi xs
 
-fibonacci :: Integer -> Integer
-fibonacci n | n == 0 = 0
-            | n == 1 = 1
-            | n >= 0 = helper 0 1 n
-            | n < 0 = helper 0 1 (abs n) * (-1)^((-n)-1)
+    where
+        xs::[Integer]
+        xs = [x*5 | x <- [1 .. 30]]
+
+    -- Чаще всего не успевает даже пройти какое-то время и на выходе по времени получается 0, 
+    -- но если на каки=-то значениях и выдётся время, то это тот же ноль с разницей в десяти тысячных единицах (0.0001)
+
+    -- Аккумуляторы позволяют повысить эффективность рекурсивных функции
+    -- с помощью использования вспомогательной функции мы сводим её к линейной
+    -- В общем то в этой задачке мы как бы схлопываем стек, если реализовывать функцию без аккумулятора, 
+    -- то у нас переполнится стек на больших значениях.
+
+    -- Асимптотическая сложность нужна чтобы определить время и память, затраченные на выполнение кода.
+    -- Собственно, существует понятие O, которое обычно используется для оценки сложности алгоритма
+    -- В этой задачке мы как раз и улучшаем асимпотику по факту у нас было O(2^n), а стало O(n), 
+    --  т.е. ассимпотика стала линейной
 
 -- Вопрос от преподавателя: Что это такое?!
 -- Ответ: То, что в скобочках до => - это ограничение класса типов
@@ -27,6 +37,17 @@ helper :: (Eq t1, Num t1, Num t2) => t2 -> t2 -> t1 -> t2
 helper prev cur n | n == 1 = cur
                 | otherwise = helper cur (prev + cur) (n-1)
 
--- функция нужна для считывания именно числа с консоли
-readNum :: String -> Integer
-readNum = read
+testTimeFibonachi :: Integer -> IO ()
+testTimeFibonachi x = let
+    fibonacci :: Integer -> Integer
+    fibonacci n | n == 0 = 0
+                | n == 1 = 1
+                | n >= 0 = helper 0 1 n
+                | n < 0 = helper 0 1 (abs n) * (-1)^((-n)-1)
+    in do
+        print ("n: " ++ show x)
+        start <- getCurrentTime
+        print ("res: " ++ show (fibonacci x))
+        stop <- getCurrentTime
+        print ("time: " ++ show(diffUTCTime stop start))
+        putStr "\n"
