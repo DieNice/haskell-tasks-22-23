@@ -23,7 +23,10 @@ getMax (x:xs) = max x (getMax xs)
 -- Функция, которая возвращает список товаров, продажа которых принесла максимальную сумму
 getMaxProducts :: [Product] -> [Product]
 getMaxProducts [] = []
-getMaxProducts (x:xs) = if getSum x == getMax (getSums (x:xs)) then x : getMaxProducts xs else getMaxProducts xs
+getMaxProducts n = getMaxProducts' n (getMax (getSums n))
+    where
+        getMaxProducts' [] _ = []
+        getMaxProducts' (x:xs) maxSum = if getSum x == maxSum then x : getMaxProducts' xs maxSum else getMaxProducts' xs maxSum
 
 -- Функция, которая возвращает список названий товаров
 getProductsNames :: [Product] -> [String]

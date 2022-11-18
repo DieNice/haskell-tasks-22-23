@@ -3,4 +3,4 @@
 
 splitText :: String -> [String]
 splitText [] = []
-splitText text = (takeWhile (/= '.') text) : splitText (dropWhile (== ' ') (dropWhile (/= '.') text))
+splitText text = (takeWhile (/= '.') text) : splitText (dropWhile (== '.') (dropWhile (/= '.') text))
