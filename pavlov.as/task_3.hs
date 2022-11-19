@@ -19,3 +19,14 @@ fibonacci_bad n
     | n == 0 = 0
     | n == 1 = 1
     | n > 0 = fibonacci_bad (n - 1) + fibonacci_bad (n - 2)
+
+-- Prelude> :load task_3.hs
+-- [1 of 1] Compiling Main             ( task_3.hs, interpreted )
+-- Ok, one module loaded.
+-- *Main> :set +s
+-- *Main> fibonacci 30
+-- 832040
+-- (0.01 secs, 73,296 bytes)
+-- *Main> fibonacci_bad 30
+-- 832040
+-- (2.45 secs, 781,569,248 bytes)

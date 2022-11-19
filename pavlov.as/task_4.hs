@@ -9,4 +9,7 @@ products = [Product "Milk" 2 50.0, Product "Bread" 1 30.0, Product "Eggs" 10 10.
 totalCost :: [Product] -> Double
 totalCost [] = 0
 totalCost (x:xs) = (cost x) + totalCost xs
-    where cost (Product _ n p) = fromIntegral n * p
+    where
+        cost (Product _ n p)
+            | n > 0 && p > 0 = fromIntegral n * p
+            | otherwise = error "Cost less then 0"

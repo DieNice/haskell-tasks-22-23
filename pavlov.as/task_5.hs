@@ -8,7 +8,9 @@ products = [Product "Milk" 2 50.0, Product "Bread" 1 30.0, Product "Eggs" 10 10.
 
 -- Функция, которая возвращает сумму продажи товара
 getSum :: Product -> Double
-getSum (Product _ count price) = fromIntegral count * price
+getSum (Product _ count price)
+            | count > 0 && price > 0 = fromIntegral count * price
+            | otherwise = error "Cost less then 0"
 
 -- Функция, которая возвращает список сумм продажи товаров
 getSums :: [Product] -> [Double]
