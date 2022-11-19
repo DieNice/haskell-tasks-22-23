@@ -1,5 +1,5 @@
 
--- TASK 4
+-- TASK 4 !!! правка для отрицательных
 
 -- Информация о товарах представлена списком следующей структуры:
 -- название,
@@ -18,7 +18,8 @@ main = print $ allProductPrice products
                     ("2", 2, 10),
                     ("3", 3, 10),
                     ("4", 4, 10),
-                    ("5", 5, 10)
+                    ("5", 5, 10),
+                    ("6", -6, 10)
                   ]
 
 --getCount :: Product -> Integer
@@ -31,7 +32,8 @@ main = print $ allProductPrice products
 --getPriceCount p =  getPrice (p)  * fromIntegral (getCount (p))
 
 getPriceCount :: Product -> Double
-getPriceCount (_, count, price) =  price  * (fromIntegral count)
+getPriceCount (_, count, price) | count >= 0 && price >= 0  = price  * (fromIntegral count)
+                                | otherwise = error "count < 0 || price < 0"
 
 allProductPriceH :: Double -> [Product] -> Double
 allProductPriceH s [] = s

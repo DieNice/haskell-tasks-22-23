@@ -1,5 +1,5 @@
 
--- TASK 5
+-- TASK 5 !!! правка для отрицательных
 
 -- Информация о товарах представлена списком следующей структуры:
 -- название,
@@ -25,7 +25,8 @@ main = print $ getMaxCountPrice products
 
 
 getPriceCount :: Product -> Double
-getPriceCount (_, count, price) =  price  * (fromIntegral count)
+getPriceCount (_, count, price) | count >= 0 && price >= 0  = price  * (fromIntegral count)
+                                | otherwise = error "count < 0 || price < 0"
 
 getMaxCountPrice :: [Product] -> [Product]
 getMaxCountPrice prods = getMaxCountPriceH prods [("Нет товаров",0,0)]
