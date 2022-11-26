@@ -2,7 +2,7 @@
 
 -- Реализовать вычисление с логированием, используя Log.
 
-data Log a = Log [String] a deriving Show
+data Log a = Log [String] a deriving Show 
 
 toLogger :: (a -> b) -> String -> (a -> Log b)
 toLogger f s = \x -> Log [s] (f x)

@@ -23,7 +23,9 @@ getName :: Good -> String
 getName (name, _, _) = name
 
 getCost :: Good -> Double
-getCost (_, amount, price) = fromInteger amount * price
+getCost (_, amount, price) | amount < 1 = error "Amount of some element < 1"
+                           | price < 0 = error "Price of some element < 0"
+                           | otherwise = fromInteger amount * price
 
 main = do
     print (getMaxProfit [("name1", 4, 100), ("name2", 9, 230.1), ("name3", 2, 900)])
