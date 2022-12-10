@@ -1,3 +1,4 @@
+import Data.Time
 -- fibonacci 0 = 0
 -- fibonacci 1 = 1
 -- fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
@@ -20,3 +21,8 @@ main = do
     print (fibonacci (-1))
     print (fibonacci (-2))
     print (fibonacci (-10))
+
+    start <- getCurrentTime
+    print(fibonacci 30)
+    stop <- getCurrentTime
+    print (diffUTCTime stop start)

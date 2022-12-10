@@ -1,4 +1,5 @@
--- Написать функцию для вычисления числа Фибоначчи,
+import Data.Time
+-- Написать функцию для вычисления числа факториала,
 -- используя механизм аккумулятора.
 
 factorial :: Integer -> Integer
@@ -13,3 +14,8 @@ main = do
     print (factorial 1)
     print (factorial 6)
     print (factorial 30)
+
+    start <- getCurrentTime
+    print(factorial 30)
+    stop <- getCurrentTime
+    print (diffUTCTime stop start)
