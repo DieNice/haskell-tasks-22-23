@@ -1,0 +1,14 @@
+-- Задание:
+--  Отсортировать список чисел в порядке убывания.
+import Data.List
+import Data.Function
+ 
+testData :: [Int]
+testData = [1,2,8,4,5,7,3]
+           
+ 
+main :: IO ()
+main = do
+    let third (x) = x
+        cond f = f `on` third 
+    print  $ sortBy (cond compare) testData 

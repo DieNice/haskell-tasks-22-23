@@ -1,0 +1,11 @@
+-- Задание:
+--  Задан текст. 
+--  Текст содержит предложения. 
+--  Признаком конца предложения является точка. Построить список предложений.
+
+splitText :: String -> [String]
+splitText [] = []
+splitText text = (takeWhile (/= '.') text) : splitText (dropWhile (== '.') (dropWhile (/= '.') text))
+
+main = do
+    print (splitText "Every    autumn the birds    fly south. Mom bought   a beautiful dress. I'm doing my homework,")

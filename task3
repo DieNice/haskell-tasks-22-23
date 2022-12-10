@@ -1,0 +1,13 @@
+-- Задание:
+--  Реализация функции для вычисления числа Фибоначи.
+--  Нужно использовать аккумуляторы, чтобы более эфективно решить задачу.
+
+fibonacci' :: Integer -> Integer
+fibonacci' n = helper n 0 1
+helper n a b | n == 0 = a
+             | n > 0  = helper (n - 1) b (a + b)
+             | n < 0  = helper (n + 1) b (a - b)
+             | otherwise = undefined
+
+main = do 
+     print(fibonacci' 10)
