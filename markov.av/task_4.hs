@@ -8,7 +8,9 @@ getSum :: [Good] -> Double
 getSum goods = helper goods 0
 
 getCost :: Good -> Double
-getCost (name, amount, price) = fromInteger amount * price
+getCost (_, amount, price) | amount < 1 = error "Amount of some element < 1"
+                           | price < 0 = error "Price of some element < 0"
+                           | otherwise = fromInteger amount * price
 
 helper :: [Good] -> Double -> Double
 helper []    cost = cost
