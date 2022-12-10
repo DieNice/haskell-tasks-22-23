@@ -16,10 +16,10 @@ getMaxProfit products
 getName :: Product -> String
 getName (name, _, _) = name
 
-getCost :: Product -> Integer
-getCost (_, amount, price) = fromInteger amount * price
+getCost (name, amount, price) | amount >= 0 && price >= 0  = price  * (fromInteger amount)
+                              | otherwise = error "amount < 0 || price < 0"
 
 main = do
-    print (getMaxProfit[("first", 5, 500), ("second", 3, 318), ("third", 19, 63)])
+    print (getMaxProfit[("first", 5, 500), ("second", 3, 318), ("third", -19, 63)])
     print (getMaxProfit[("first", 5, 500)])
-    print (getMaxProfit[])
+    -- print (getMaxProfit[])
