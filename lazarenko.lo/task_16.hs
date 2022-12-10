@@ -2,7 +2,6 @@
 {-# LANGUAGE InstanceSigs #-}
 data Point3D a = Point3D a a a deriving Show
 
--- Проверяем работоспособность на ситуации из примера к заданию
 main :: IO()
 main = do
     print $ fmap (+ 1) (Point3D 5 6 7)

@@ -5,7 +5,6 @@
 --  GHCi> toString (True,False)
 --  "(true,false)"
 
--- Проверяем работоспособность на ситуациях из примеров к заданию
 {-# LANGUAGE InstanceSigs #-}
 main :: IO()
 main = do

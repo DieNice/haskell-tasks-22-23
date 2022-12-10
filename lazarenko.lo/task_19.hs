@@ -19,10 +19,8 @@ main = do
                 [20, 14, 2, 0]
             ]
 
--- Проходимся по кортежам списка, вычисляем стоимость каждого товара и суммируем полученный список
 maxNumbers :: [[Integer]] -> [Integer]
 maxNumbers = map maxNumber
 
--- Вычисляем стоимость товара в зависимости от его количества
 maxNumber :: Ord a => [a] -> a
 maxNumber arr = head $ filter (\x -> x==maximum arr) arr

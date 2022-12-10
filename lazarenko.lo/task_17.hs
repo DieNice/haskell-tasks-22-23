@@ -4,7 +4,6 @@
 data Point3D a = Point3D a a a deriving Show
 data GeomPrimitive a = Point (Point3D a) | LineSegment (Point3D a) (Point3D a) deriving Show
 
--- Проверяем работоспособность на ситуациях из примеров к заданию
 main :: IO()
 main = do
     print $ (+1) <$> Point (Point3D 0 0 0)

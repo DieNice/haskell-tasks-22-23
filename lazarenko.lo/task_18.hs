@@ -3,7 +3,6 @@
 
 data Log a = Log [String] a deriving Show
 
--- Проверяем работоспособность на ситуациях из примеров к заданию
 main :: IO()
 main = do
     let add1Log = toLogger (+1) "added one"

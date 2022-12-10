@@ -3,7 +3,6 @@
 
 import Data.Function ( on )
 
--- Проверяем работоспособность на ситуациях из примеров к заданию
 main :: IO()
 main = do
     print $ multSecond ('A', 2) ('E', 7)

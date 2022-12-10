@@ -19,7 +19,6 @@ main = do
 second :: (a, b) -> b
 second (_, x) = x
 
--- Немного модифицировали нашу сортировку и сделали её не по возрастанию, а по убыванию
 qsort :: Ord a1 => [(a2, a1)] -> [(a2, a1)]
 qsort [] = []
 qsort (x:xs) = qsort (filter (\y -> second x <= second y) xs) ++ [x] ++ qsort (filter (\y -> second x > second y) xs)

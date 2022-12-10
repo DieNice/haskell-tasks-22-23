@@ -9,7 +9,6 @@
 --  GHCi> toString ()
 --  "unit type"
 
--- Проверяем работоспособность на ситуациях из примеров к заданию (ожидаемой работы функций)
 {-# LANGUAGE InstanceSigs #-}
 main :: IO()
 main = do
