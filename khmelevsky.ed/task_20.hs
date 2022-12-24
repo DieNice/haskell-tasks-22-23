@@ -67,15 +67,17 @@ main = do
     -- 4. Из исходного списка сформировать список списков;
     -- print $ listLists numbers
 
+    print $ listLists (>20) []
+
     putStrLn "Test listLists:"
     putStrLn "Входной список: [0, 10, 3, 25, 15, 84, 1, 0, -5]"
-    putStrLn "Ожидаемый результат: [[0], [10], [3], [25], [15], [84], [1], [0], [-5]]"
-    print $ assert (listLists numbers == [[0], [10], [3], [25], [15], [84], [1], [0], [-5]]) "Test passed"
+    putStrLn "Ожидаемый результат: [[25, 84], [0, 10, 3, 15, 1, 0, -5]]"
+    print $ assert (listLists (>20) numbers == [[25, 84], [0, 10, 3, 15, 1, 0, -5]]) "Test passed"
     putStrLn ""
 
     putStrLn "Входной список: []"
     putStrLn "Ожидаемый результат: []"
-    print $ assert (null (listLists [])) "Test passed"
+    print $ assert (null (listLists (==1) [])) "Test passed"
     putStrLn ""
 
     -- 5. Из исходного списка сформировать список пар, где первый элемент каждой пары равен соответствующему элементу исходного списка, 
@@ -141,8 +143,9 @@ multiplyNum num = map (* num)
 listTuples :: b -> [a] -> [(a, b)]
 listTuples num arr = [(z, num) | z<-arr]
 
-listLists :: [a] -> [[a]]
-listLists arr = [[x] | x<-arr]
+listLists :: (a -> Bool) -> [a] -> [[a]]
+listLists _ [] = []
+listLists pred arr = [filter pred arr, filter (not . pred) arr]
 
 newListTuples :: (Eq a) => [a] -> [(a, Int)]
 newListTuples [] = error "List empty"
