@@ -65,14 +65,15 @@ main = do
     putStrLn ""
 
     -- 4. Из исходного списка сформировать список списков;
-    -- print $ listLists numbers
-
-    print $ listLists (>20) []
+    -- Рассмотрим логику на примере первого теста: 
+    --  1 и 2 попадают в первый список, потому что они меньше первой тройки: [1, 2]
+    --  2 попадает в следующий список, потому что она меньше уже следующей стройки: [2]
+    --  три единички попадают в последний список, потому что они меньше последней тройки: [1, 1, 1]
 
     putStrLn "Test listLists:"
-    putStrLn "Входной список: [0, 10, 3, 25, 15, 84, 1, 0, -5]"
-    putStrLn "Ожидаемый результат: [[25, 84], [0, 10, 3, 15, 1, 0, -5]]"
-    print $ assert (listLists (>20) numbers == [[25, 84], [0, 10, 3, 15, 1, 0, -5]]) "Test passed"
+    putStrLn "Входной список: [1, 2, 3, 2, 3, 1, 1, 1, 3]"
+    putStrLn "Ожидаемый результат: [[1, 2], [2], [1, 1, 1]]"
+    print $ assert (listLists (<3) test1 == [[1, 2], [2], [1, 1, 1]]) "Test passed"
     putStrLn ""
 
     putStrLn "Входной список: []"
@@ -134,6 +135,8 @@ main = do
         numbers :: [Integer]
         numbers = [0, 10, 3, 25, 15, 84, 1, 0, -5]
 
+        test1 = [1,2,3,2,3,1,1,1,3]
+
 plusNum :: Num b => b -> [b] -> [b]
 plusNum num = map (+ num)
 
@@ -143,9 +146,16 @@ multiplyNum num = map (* num)
 listTuples :: b -> [a] -> [(a, b)]
 listTuples num arr = [(z, num) | z<-arr]
 
+-- span - функция высшего порядка, 
+--  разбивающая список на 2 по условию и возвращающая кортеж
+-- В функции мы рекурсивно отбрасываем элементы, не удовлетворяющие p
 listLists :: (a -> Bool) -> [a] -> [[a]]
-listLists _ [] = []
-listLists pred arr = [filter pred arr, filter (not . pred) arr]
+listLists p [] = []
+listLists p ls = let (a,rs)  = span p ls -- кортеж 2-ух списков, удовлетворяющий условию p
+                     (b,rs') = span (not . p) rs -- кортеж 2-ух списков, не удовлетворяющий условию p
+                -- если первый список пустой, то рекурсивно вызываем функцию с новым списком,
+                -- инчае добавляем первый список в результат
+                in if null a then listLists p rs' else a : listLists p rs'
 
 newListTuples :: (Eq a) => [a] -> [(a, Int)]
 newListTuples [] = error "List empty"
